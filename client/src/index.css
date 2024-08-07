@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*, ::before, ::after, Button {
+    --tw-ring-color: transparent;
+}
+
