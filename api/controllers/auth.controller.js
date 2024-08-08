@@ -1,28 +1,29 @@
-import User from '../models/user.model.js'
+import User from '../models/user.model.js';
 import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 
 export const signup = async (req, res, next) => {
-    const { username, email, password } = req.body;
+  const { username, email, password } = req.body;
 
-    if (!username || !email || !password || username === '' || email === '' || password === '' ) {
-        next(errorHandler(400, 'Se requieren todos los campos'));
-    }
+  if (!username || !email || !password || username === '' || email === '' || password === '' ) {
+    next(errorHandler(400, 'Se requieren todos los campos'));
+  }
 
-    const hashedPassword = bcryptjs.hashSync(password, 10);
+  const hashedPassword = bcryptjs.hashSync(password, 10);
 
-    const newUser = new User ({
-        username,
-        email,
-        password: hashedPassword,
-    });
+  const newUser = new User({
+    username,
+    email,
+    password: hashedPassword,
+  });
 
-    try{
-        await newUser.save();
-        res.json({message : 'registro funciona'});
-    } catch (error) {
-        next(error);
-    }
-
-    
+  try {
+    await newUser.save();
+    res.json({ message: 'Registro existoso.' });
+  } catch (error) {
+    if (error.code === 11000) {
+        return next(errorHandler(400, 'El nombre de usuario o correo electrónico ya está en uso.'));
+      }
+    next(error);
+  }
 };
