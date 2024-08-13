@@ -44,7 +44,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className='min-h-scareen mt-20 mb-20'>
+    <div className='min-h-screen mt-20 mb-20'>
       <div className='flex flex-col md:flex-row md:items-center p-3 max-w-3xl mx-auto gap-6'>
         {/* izquierda: logo - descripción */}
         <div className='flex-1'>

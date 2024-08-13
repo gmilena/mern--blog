@@ -43,7 +43,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className='min-h-scareen mt-20'>
+    <div className='min-h-screen mt-20'>
       <div className='flex flex-col md:flex-row md:items-center p-3 max-w-3xl mx-auto gap-6'>
         {/* izquierda: logo - descripción */}
         <div className='flex-1'>
@@ -86,9 +86,7 @@ export default function SignUp() {
                 'Registrarse'
               )}
             </Button>
-            <OAuth>
-              
-            </OAuth>
+            <OAuth></OAuth>
           </form>
           <div className='flex gap-2 text-sm mt-5 justify-center'>
             <span>¿Ya tenés una cuenta?</span>
