@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button, Navbar, NavbarToggle, TextInput } from 'flowbite-react';
+import { Avatar, Button, Dropdown, Navbar, NavbarToggle, TextInput } from 'flowbite-react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   const path = useLocation().pathname;
-
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <Navbar>
       <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
@@ -24,11 +25,28 @@ export default function Header() {
           <FaMoon />
         </Button>
 
-        <Link to='/sign-in'>
-          <Button className='me-1 p-0.5 bg-gradient-to-br from-green-400  to-teal-500 rounded-lg text-white' outline>
-            Ingresar
-          </Button>
-        </Link>
+        {currentUser ? (
+          <Dropdown arrowIcon={false} inline label={<Avatar alt='user_avatar' img={currentUser.profilePicture} rounded />}>
+            <Dropdown.Header className='text-center bg-teal-50 border-2'>
+              <span className='block text-sm'>@{currentUser.username}</span>
+              <span className='block text-sm font-medium truncate mt-1'>{currentUser.email}</span>
+            </Dropdown.Header>
+
+            <Link to={'/dashboard?tab=profile'}>
+              <Dropdown.Item>Perfil</Dropdown.Item>
+            </Link>
+
+            <Dropdown.Divider />
+
+            <Dropdown.Item>Cerrar sesión</Dropdown.Item>
+          </Dropdown>
+        ) : (
+          <Link to='/sign-in'>
+            <Button className='me-1 p-0.5 bg-gradient-to-br from-green-400  to-teal-500 rounded-lg text-white' outline>
+              Ingresar
+            </Button>
+          </Link>
+        )}
 
         <NavbarToggle />
       </div>
