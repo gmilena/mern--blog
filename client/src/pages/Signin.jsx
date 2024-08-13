@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInSucces, signInFaliure, signInStart } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -81,12 +82,13 @@ export default function SignIn() {
                 'Iniciar sesión'
               )}
             </Button>
+            <OAuth></OAuth>
           </form>
           <div className='flex gap-2 text-sm mt-5 justify-center'>
             <span>¿No tenés una cuenta?</span>
 
-            <Link to='/sign-in' className='text-teal-500'>
-              Iniciar sesión
+            <Link to='/sign-up' className='text-teal-500'>
+              Registrate
             </Link>
           </div>
 
